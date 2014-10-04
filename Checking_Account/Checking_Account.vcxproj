@@ -14,6 +14,7 @@
     <ProjectGuid>{2EC1F4D0-E0D3-4E23-99B0-06B26E8ADE88}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Checking_Account</RootNamespace>
+    <ProjectName>Bank Account</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -79,7 +80,6 @@
     <ClCompile Include="Application.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Account.h" />
     <ClInclude Include="Checking.h" />
     <ClInclude Include="CreditCard.h" />
     <ClInclude Include="Savings.h" />

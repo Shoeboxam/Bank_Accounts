@@ -1,21 +1,38 @@
 #ifndef CREDITCARD_H
 #define CREDITCARD_H
 
-#include "Account.h"
-#include "Checking.h"
-
 #include <stdexcept>
 
-class CreditCard :public Account{
+class CreditCard{
 
-	CreditCard(float balanceReq, float rateInterestReq, float creditLimitReq = 5000) :Account(balanceReq) {}
+	float balance;
 	static float rateInterest;
 	float creditLimit;
 
-	bool transfer_from_checking(float amount, Checking creditCardAccount);
+public:
+	CreditCard(float balanceReq, float rateInterestReq, float creditLimitReq = 5000);
+
+	float get_balance() const { return balance; }
+
+	bool deposit(float amount);
+	bool charge(float amount);
+
+	CreditCard& operator+(float input){
+		deposit(input);
+	}
+
+	CreditCard& operator-(float input){
+		charge(input);
+	}
 };
 
 CreditCard::CreditCard(float balanceReq, float rateInterestReq, float creditLimitReq){
+	//Raincheck balance before assigning
+	if (balanceReq < 0){
+		throw std::invalid_argument("Balance cannot be negative");
+	}
+	balance = balanceReq;
+
 	//Raincheck interest rate before assigning
 	if (rateInterestReq < 0 || rateInterestReq > 100){	
 		throw std::invalid_argument("Interest rate not between 0 and 100.");
@@ -29,10 +46,22 @@ CreditCard::CreditCard(float balanceReq, float rateInterestReq, float creditLimi
 	creditLimit = creditLimitReq;
 }
 
-bool CreditCard::transfer_from_checking(float amount, Checking creditCardAccount){
-	if (creditCardAccount.withdraw(amount)){
-		deposit(amount);
+bool CreditCard::deposit(float amount){
+	//Must be positive
+	if (amount > 0){
+		balance += amount;
+		return true;
 	}
+	return false;
+}
+
+bool CreditCard::charge(float amount){
+	//Must be positive, and must have enough in account
+	if (amount > 0 && balance - amount >= 0){
+		balance -= amount;
+		return true;
+	}
+	return false;
 }
 
 #endif
