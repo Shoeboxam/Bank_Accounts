@@ -3,28 +3,34 @@
 
 #include <stdexcept>
 #include <string>
-#include <list>
+#include <vector>
 #include <utility>
 
 using std::string;
 
-using std::list;
+using std::vector;
 using std::pair;
 
 
 class Account {
-	static int account_total;
-	int account_number;
+	static int instances;
+
+protected:
+	int accountNumber;
 	float balance;
 
-	list<pair<float, string>> history;
+	vector<pair<float, string>> history;
 	
 
 public:
-	Account(float balanceReq = 0, string title = "Initial Balance");
+	Account(float mbalance = 0, string title = "Initial Balance");
+	~Account();
 
 	float get_balance() const { return balance; }
-	list<pair<float, string>> get_history() const { return history; }
+	vector<pair<float, string>> get_history() const { return history; }
+	string get_history_string();
+	string get_last_transaction_string();
+	int get_account_number() const { return accountNumber; }
 	
 	bool deposit(float amount, string title = "");
 	bool withdraw(float amount, string title = "");
