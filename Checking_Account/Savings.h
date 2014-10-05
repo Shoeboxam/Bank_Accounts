@@ -1,54 +1,21 @@
 #ifndef SAVINGS_H
 #define SAVINGS_H
 
+#include "Account.h"
+
 #include <stdexcept>
 
-class Savings{
-
-	float balance;
-
+class Savings : public Account {
 public:
-	Savings(float balanceReq = 0);
+	Savings(float balanceReq) : Account(balanceReq) {}
 
-	float get_balance() const { return balance; }
-
-	bool deposit(float amount);
-	bool withdraw(float amount);
-
-	Savings& operator+(float input){
-		deposit(input);
-	}
-
-	Savings& operator-(float input){
-		withdraw(input);
-	}
+	bool transfer_from_checking(float amount, Checking checkingAccount);
 };
 
-Savings::Savings(float balanceReq){
-	//Raincheck balance before assigning
-	if (balanceReq < 0){
-		throw std::invalid_argument("Balance cannot be negative");
+bool Savings::transfer_from_checking(float amount, Checking checkingAccount){
+	if (checkingAccount.withdraw(amount)){
+		deposit(amount);
 	}
-	balance = balanceReq;
-
-}
-
-bool Savings::deposit(float amount){
-	//Must be positive
-	if (amount > 0){
-		balance += amount;
-		return true;
-	}
-	return false;
-}
-
-bool Savings::withdraw(float amount){
-	//Must be positive, and must have enough in account
-	if (amount > 0 && balance - amount >= 0){
-		balance -= amount;
-		return true;
-	}
-	return false;
 }
 
 #endif

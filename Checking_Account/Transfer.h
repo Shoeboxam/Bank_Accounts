@@ -7,12 +7,6 @@
 
 class Transfer {
 public:
-
-	bool transfer_from_checking(float amount, Checking creditCardAccount);
-
-	bool transfer_from_checking(float amount, Savings checkingAccount);
-
-	bool transfer_from_savings(float amount, Savings savingsAccount);
 };
 
 bool CreditCard::transfer_from_checking(float amount, Checking creditCardAccount){

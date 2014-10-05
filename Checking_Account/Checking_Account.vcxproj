@@ -80,6 +80,7 @@
     <ClCompile Include="Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Account.h" />
     <ClInclude Include="Checking.h" />
     <ClInclude Include="CreditCard.h" />
     <ClInclude Include="Savings.h" />
