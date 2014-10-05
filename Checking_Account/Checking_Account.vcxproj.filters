@@ -44,9 +44,6 @@
     <ClInclude Include="CreditCard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Transfer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Account.h">
       <Filter>Header Files</Filter>
     </ClInclude>

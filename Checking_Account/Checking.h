@@ -19,9 +19,6 @@ public:
 		rateInterest = rateInterestReq;
 	}
 
-	bool deposit(float amount);
-	bool withdraw(float amount);
-
 	bool transfer_from_savings(float amount, Savings &savingsAccount);
 };
 

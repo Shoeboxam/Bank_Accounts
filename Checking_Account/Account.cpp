@@ -1,8 +1,9 @@
 #include "Account.h"
 
+int Account::account_total = 0;
+
 Account::Account(float balanceReq, string title){
 
-	account_total = 1;
 	account_number = account_total++;
 
 	//Raincheck balance before assigning

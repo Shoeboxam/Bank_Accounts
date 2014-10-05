@@ -18,7 +18,7 @@ public:
 		creditLimit = creditLimitReq;
 	}
 
-	static bool set_finance_rate(float rateFinanceReq);
+	bool set_finance_rate(float rateFinanceReq);
 
 	void operator+(float input){
 		deposit(input);

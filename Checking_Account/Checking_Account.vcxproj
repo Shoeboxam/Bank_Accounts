@@ -88,7 +88,6 @@
     <ClInclude Include="Checking.h" />
     <ClInclude Include="CreditCard.h" />
     <ClInclude Include="Savings.h" />
-    <ClInclude Include="Transfer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
