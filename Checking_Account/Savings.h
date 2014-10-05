@@ -3,19 +3,13 @@
 
 #include "Account.h"
 
-#include <stdexcept>
+class Checking; //Forward declaration
 
 class Savings : public Account {
 public:
-	Savings(float balanceReq) : Account(balanceReq) {}
+	Savings(float balanceReq) : Account(balanceReq){}
 
-	bool transfer_from_checking(float amount, Checking checkingAccount);
+	bool transfer_from_checking(float amount, Checking &checkingAccount);
 };
-
-bool Savings::transfer_from_checking(float amount, Checking checkingAccount){
-	if (checkingAccount.withdraw(amount)){
-		deposit(amount);
-	}
-}
 
 #endif
