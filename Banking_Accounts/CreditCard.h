@@ -3,7 +3,7 @@
 
 #include "Account.h"
 
-//Forward declarations to soothe compiler. Build just needs to survive until source includes
+//Forward declarations to soothe compiler. Build just needs to survive until preprocessor includes run
 class Checking;
 class Savings;
 
