@@ -14,15 +14,8 @@ bool Savings::set_interest_rate(float mrateInterest){
 }
 
 float Savings::compound(){
-	float interest = balance * (rateInterest / 100);
+	//What a joke... $0.01
+	float interest = balance * (rateInterest / 100 / 12);
 	deposit(interest, "Monthly interest");
 	return interest;
-}
-
-bool Savings::transfer_from_checking(float amount, Checking &checkingAccount, string title){
-	if (checkingAccount.withdraw(amount, title)){
-		deposit(amount, title);
-		return true;
-	}
-	return false;
 }

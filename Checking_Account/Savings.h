@@ -16,12 +16,11 @@ public:
 		}
 		rateInterest = mrateInterest;
 	}
+
 	float compound();
 
 	static bool set_interest_rate(float mrateInterest);
 	static float get_interest_rate() { return rateInterest; }
-
-	bool transfer_from_checking(float amount, Checking &checkingAccount, string title = "Checking Transfer");
 
 	void operator+(float input){
 		deposit(input);

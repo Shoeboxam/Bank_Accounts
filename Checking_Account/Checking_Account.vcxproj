@@ -79,7 +79,6 @@
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Checking.cpp" />
     <ClCompile Include="CreditCard.cpp" />
     <ClCompile Include="Savings.cpp" />
   </ItemGroup>

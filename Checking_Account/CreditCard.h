@@ -3,32 +3,54 @@
 
 #include "Account.h"
 
-class Checking; //Forward declaration to soothe compiler
+//Forward declarations to soothe compiler. Build just needs to survive until source includes
+class Checking;
 class Savings;
 
 class CreditCard : public Account {
+	
 	static float rateFinance;
 	float creditLimit;
 
-	//bool deposit(float amount, string title = ""); //Mask inherited deposit
+	//Mask deposit via overriding inheritance with private... disabled
+	//bool deposit(float amount, string title = "");
 
 public:
+	//Default constructor, passes 5000 to parent constructor unless argument given
 	CreditCard(float mcreditLimit = 5000) : Account(mcreditLimit){
 		//Raincheck credit limit before assigning
+		//Except instead of return failures in constructors/destructors... stdexcept already imported in parent
 		if (mcreditLimit < 0) {
 			throw std::invalid_argument("Credit limit cannot be negative.");
 		}
 		creditLimit = mcreditLimit;
 	}
 
+	/* Setters and Getters */
 	static bool set_finance_rate(float mrateFinance);
 	static float get_finance_rate() { return rateFinance; }
 	float get_debt() const { return creditLimit - balance; }
 
+	//Applies monthly financing costs
 	float compound();
 
-	bool transfer_from_checking(float amount, Checking &checkingAccount, string title = "Checking credit payment");
-	bool transfer_from_savings(float amount, Savings &savingsAccount, string title = "Savings credit payment");
+	//Overwrite transfer_from to add credit limit check
+	template <typename genAccount> 
+	bool transfer_from(genAccount &genericAccount, float amount, string title = "Credit Transfer"){
+
+		//Clamp payment to prevent overpaying
+		amount = amount > get_debt() ? get_debt() : amount;
+
+		return genericAccount.withdraw(amount, title) ? (deposit(amount, title), true) : false;
+	}
+
+	void operator+(float input){
+		deposit(input);
+	}
+
+	void operator-(float input){
+		withdraw(input);
+	}
 
 };
 

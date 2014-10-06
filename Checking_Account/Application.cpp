@@ -1,3 +1,4 @@
+
 //Banking accounts
 
 #include <iostream>
@@ -12,9 +13,10 @@
 using std::cout;
 using std::endl;
 
-const int timespanMonths = 8;
+const int timespanMonths = 8; //Configurable
 
 float generateValue(int min, int max){
+	// mul/div by 100 to generate pennies
 	min *= 100;
 	max *= 100;
 	return float(( min + rand() % (max - min + 1))) / 100;
@@ -36,13 +38,18 @@ int main(){
 	CreditCard Visa(5000);
 
 	cout << endl << "Opening Balances" << endl;
-	cout << WellsFargo.get_account_number() << " Wells Fargo Savings\t" << std::setw(7) << WellsFargo.get_balance() << endl;
-	cout << Chase.get_account_number() << " Chase Checking\t" << std::setw(7) << Chase.get_balance() << endl;
-	cout << Visa.get_account_number() << " Visa Credit Limit\t" << std::setw(7) << Visa.get_balance() << endl << endl;
+	cout << WellsFargo.get_account_number() << " Wells Fargo Savings\t" << std::setw(7) << WellsFargo.get_balance() << "$" << endl;
+	cout << Chase.get_account_number() << " Chase Checking\t" << std::setw(7) << Chase.get_balance() << "$" << endl;
+	cout << Visa.get_account_number() << " Visa Credit Limit\t" << std::setw(7) << Visa.get_balance() << "$" << endl << endl;
 
-	float accumulatedBounces = 0;
+	cout << endl << "Press any button to simulate " << timespanMonths << " months." << endl << endl;
+	system("pause > nul");
+
+
 
 	cout << "... Simulating ..." << endl << endl;
+
+	float accumulatedBounces = 0;
 	int elapsedMonths = 0;
 	while (elapsedMonths < timespanMonths){
 		float payment;
@@ -82,20 +89,20 @@ int main(){
 
 		//Pay Credit Card
 		payment = generateValue(200, 300);
-		if (!Visa.transfer_from_checking(payment, Chase, "Credit Card Payment")){
+		if (!Visa.transfer_from(Chase, payment, "Credit Card Payment")){
 			cout << "Chase checking short $" << payment - Chase.get_balance() << " for credit card payment." << endl;
 		}
 
-		//End of month tidying - optional, empties checking and savings to reduce credit financing
+		//End of month tidying - optional, transfers from checking and savings to reduce credit financing
 		if (Visa.get_debt()) {
 
 			float payPartial = Chase.get_balance() > Visa.get_debt() ? Visa.get_debt() : Chase.get_balance();
-			if (Visa.transfer_from_checking(payPartial, Chase, "Chase Checking")){
+			if (Visa.transfer_from(Chase, payPartial, "Checking transfer")){
 				cout << "\tPartial credit pay $" << payPartial << " from checking." << endl;
 			}
 			
 			payPartial = WellsFargo.get_balance() > Visa.get_debt() ? Visa.get_debt() : WellsFargo.get_balance();
-			if (Visa.transfer_from_savings(payPartial, WellsFargo, "Wells Fargo savings")){
+			if (Visa.transfer_from(WellsFargo, payPartial, "Savings transfer")){
 				cout << "\tPartial credit pay $" << payPartial << " from savings." << endl;
 			}
 		}
@@ -104,9 +111,10 @@ int main(){
 		WellsFargo.compound();
 
 	}
-	cout << endl << "Press any button to print history." << endl << endl;
 
+	cout << endl << "Press any button to print history." << endl << endl;
 	system("pause > nul");
+
 
 	cout << "Wells Fargo savings history" << endl
 		 << "---------------------------" << endl
@@ -127,5 +135,7 @@ int main(){
 
 
 	system("pause > nul");
+	cout << endl << "Press any button to exit." << endl << endl;
+
 	return 0;
 }

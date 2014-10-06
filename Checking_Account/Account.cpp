@@ -9,6 +9,7 @@ using std::endl;
 
 using std::ostream;
 
+//Static initialization
 int Account::instances = 0;
 
 Account::Account(float mbalance, string title){
@@ -20,6 +21,7 @@ Account::Account(float mbalance, string title){
 	}
 	balance = mbalance;
 
+	//Save transaction in data structure using temporary pair
 	history.push_back(pair<float, string>(mbalance, title));
 
 	cout << "Opened Account #" << get_account_number() << endl;
