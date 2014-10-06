@@ -1,3 +1,4 @@
+//Checking.h - child header
 #ifndef CHECKING_H
 #define CHECKING_H
 
@@ -5,8 +6,6 @@
 
 //Every single feature of checking was generalized out to account.
 //Kept class for sake of extensibility and readablity
-
-class Savings; //Forward Declaration to soothe compiler
 
 //Inherit from Account; only checking specific methods in Checking
 class Checking : public Account {

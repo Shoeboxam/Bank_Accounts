@@ -1,11 +1,8 @@
+//CreditCard.h - child header
 #ifndef CREDITCARD_H
 #define CREDITCARD_H
 
 #include "Account.h"
-
-//Forward declarations to soothe compiler. Build just needs to survive until preprocessor includes run
-class Checking;
-class Savings;
 
 class CreditCard : public Account {
 	

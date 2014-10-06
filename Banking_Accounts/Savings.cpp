@@ -1,5 +1,5 @@
+//Savings.cpp - child source
 #include "Savings.h"
-#include "Checking.h"
 
 float Savings::rateInterest = 0.06;
 

@@ -1,4 +1,4 @@
-
+//Application.cpp - test driver
 //Banking accounts
 
 #include <iostream>
@@ -52,6 +52,7 @@ int main(){
 	float accumulatedBounces = 0;
 	int elapsedMonths = 0;
 	while (elapsedMonths < timespanMonths){
+		cout << "\tMonth " << elapsedMonths << endl;
 		float payment;
 
 		elapsedMonths++;
@@ -109,7 +110,11 @@ int main(){
 
 		Visa.compound();
 		WellsFargo.compound();
-
+		cout << endl << "\tBalances" << endl;
+		cout << "Savings:  $" << WellsFargo.get_balance() << endl;
+		cout << "Checking: $" << Chase.get_balance() << endl;
+		cout << "Credit:   $" << Visa.get_balance() << endl 
+			<<	"-----------------" << endl << endl;
 	}
 
 	cout << endl << "Press any button to print history." << endl << endl;
