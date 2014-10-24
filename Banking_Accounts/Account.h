@@ -15,7 +15,7 @@ using std::vector;
 using std::pair;
 
 
-class Account {
+class Account{
 	//Used to keep track of account number
 	static int instances;
 	int accountNumber;
@@ -30,6 +30,7 @@ protected:
 public:
 	//Default values allow it to be read as default constructor while still taking optional parameters
 	Account(float mbalance = 0, string title = "Initial Balance");
+	Account(const Account &input);
 	~Account();
 
 	/* Setters and Getters */
