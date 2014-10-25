@@ -10,12 +10,11 @@ using std::string;
 
 class Bank {
 	//Did some reading online... pimpl. 
-	//Allocation is calculated from the header file, so methods cannot be concealed. 
-	//Instead, use a pointer to more methods!
-	struct Implementation;
+	class Implementation;
 	Implementation *concealed;
+
 public:
-	Bank();
+	Bank() { concealed = new Implementation; }
 	~Bank();
 
 	bool withdraw(int account_number, float amount, string title);
