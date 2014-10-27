@@ -12,9 +12,9 @@ class Bank {
 	//Did some reading online... pimpl. 
 	class Implementation;
 	Implementation *concealed;
-
+	
 public:
-	Bank() { concealed = new Implementation; }
+	Bank();
 	~Bank();
 
 	bool withdraw(int account_number, float amount, string title);
