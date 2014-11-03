@@ -28,7 +28,6 @@ int main(){
 
 	cout << "\tBank Account Simulator" << endl
 		 << "\t----------------------" << endl;
-	cout << "\t" << Savings::get_interest_rate() << "% Interest rate | " << CreditCard::get_finance_rate() << "% Finance rate" << endl << endl;
 
 	//Initialize accounts
 
@@ -53,7 +52,7 @@ int main(){
 	float accumulatedBounces = 0;
 	int elapsedMonths = 0;
 	while (elapsedMonths < timespanMonths){
-		cout << "\tMonth " << elapsedMonths << endl;
+		cout << "\tMonth " << elapsedMonths+1 << endl;
 		float payment;
 
 		elapsedMonths++;
@@ -83,7 +82,7 @@ int main(){
 		//Charge ten times Credit Card
 		for (int charge = 1; charge <= 10; charge++){
 			payment = generateValue(20, 90);
-			if (!WellsFargo.withdraw(id_checking, payment, "Charge #" + std::to_string(charge))){
+			if (!WellsFargo.withdraw(id_credit, payment, "Charge #" + std::to_string(charge))){
 				cout << "Credit card short $" << payment - WellsFargo.get_balance(id_checking) << " for charge #" << charge << "." << endl;
 				accumulatedBounces += payment;
 			}
@@ -126,6 +125,8 @@ int main(){
 
 	cout << "\tAccumulated bounces: $" << accumulatedBounces << endl;
 
+	//Simply demonstrates closing an account
+	WellsFargo.close(2);
 
 	system("pause > nul");
 	cout << endl << "Press any button to exit." << endl << endl;

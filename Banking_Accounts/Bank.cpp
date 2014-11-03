@@ -1,6 +1,10 @@
 #include "Bank.h"
 #include <vector>
 
+#include "CreditCard.h"
+#include "Savings.h"
+#include "Checking.h"
+
 using std::vector;
 
 class Bank::Implementation{
@@ -54,7 +58,7 @@ bool Bank::Implementation::withdraw(int account_number, float mAmount, string mT
 
 bool Bank::Implementation::close(int account_number) {
 	if (account_number < account_storage.size() && account_number >= 0){
-		account_storage[account_number - 1] = new Account;
+		account_storage[account_number - 1]->~Account();
 		return true;
 	}
 	return false;
@@ -106,6 +110,10 @@ int Bank::open_savings(float initial_balance){
 
 int Bank::open_credit(float credit_limit){
 	return concealed->open_credit(credit_limit);
+}
+
+bool Bank::close(int account_number){
+	return concealed->close(account_number);
 }
 
 string Bank::get_history(int account_number){

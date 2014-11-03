@@ -4,12 +4,9 @@
 #include <string>
 using std::string;
 
-#include "CreditCard.h"
-#include "Savings.h"
-#include "Checking.h"
+//The header file is all that need be visible to the user.
 
 class Bank {
-	//Did some reading online... pimpl.
 	class Implementation;
 	Implementation *concealed;
 	
