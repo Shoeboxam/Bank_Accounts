@@ -8,13 +8,9 @@ class Savings : public Account {
 	static float rateInterest;
 
 public:
-	Savings(float mbalance = 0, float mrateInterest = rateInterest) : Account(mbalance){
-		//Raincheck interest rate before assigning
-		if (mrateInterest < 0 || mrateInterest > 100){
-			throw std::invalid_argument("Interest rate not between 0 and 100.");
-		}
-		rateInterest = mrateInterest;
-	}
+	Savings(float mbalance = 0, float mrateInterest = rateInterest);
+
+	virtual string get_type() { return "Savings"; }
 
 	float compound();
 

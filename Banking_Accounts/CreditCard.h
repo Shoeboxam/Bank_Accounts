@@ -14,14 +14,9 @@ class CreditCard : public Account {
 
 public:
 	//Default constructor, passes 5000 to parent constructor unless argument given
-	CreditCard(float mcreditLimit = 5000) : Account(mcreditLimit){
-		//Raincheck credit limit before assigning
-		//Except instead of return failures in constructors/destructors... stdexcept already imported in parent
-		if (mcreditLimit < 0) {
-			throw std::invalid_argument("Credit limit cannot be negative.");
-		}
-		creditLimit = mcreditLimit;
-	}
+	CreditCard(float mcreditLimit = 5000);
+
+	virtual string get_type() { return "CreditCard"; }
 
 	/* Setters and Getters */
 	static bool set_finance_rate(float mrateFinance);

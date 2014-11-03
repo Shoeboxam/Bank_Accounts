@@ -20,6 +20,8 @@ class Account{
 	static int instances;
 	int accountNumber;
 
+	string _account_owner;
+
 protected:
 	//Should be directly modifiable in child classes
 	float balance;
@@ -39,6 +41,11 @@ public:
 	string get_history_string();
 	string get_last_transaction_string();
 	int get_account_number() const { return accountNumber; }
+
+	string get_owner() { return _account_owner; }
+	void set_owner(string mOwner) { _account_owner = mOwner; }
+
+	virtual string get_type() { return "Generic"; }
 	
 	//Optional title can be passed for each deposit/withdrawal
 	bool deposit(float amount, string title = "");
@@ -50,12 +57,12 @@ public:
 		return genericAccount.withdraw(amount, title) ? (deposit(amount, title), true) : false;
 	}
 
-	void operator+(float input){
-		deposit(input);
+	bool operator+(float input){
+		return deposit(input);
 	}
 
-	void operator-(float input){
-		withdraw(input);
+	bool operator-(float input){
+		return withdraw(input);
 	}
 
 };
